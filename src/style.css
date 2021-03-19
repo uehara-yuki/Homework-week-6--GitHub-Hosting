@@ -19,10 +19,20 @@ h3 {
 }
 .date,
 .humidity,
-.wind {
+.wind,
+.precipitation,
+.weatherDescription {
   font-size: 25px;
+  text-transform: capitalize;
 }
-.container {;
+.fasfa-cloud-sun{
+
+font-size: 25px;
+line-height: 4px;
+}
+
+
+.container {
   background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
   border-radius: 10px;
   margin: auto;

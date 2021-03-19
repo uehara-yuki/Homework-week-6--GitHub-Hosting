@@ -57,11 +57,15 @@ function showTemperature(response) {
 
   let humidity = document.querySelector("#humidity");
   let humidityRound = Math.round(response.data.main.humidity);
-  humidity.innerHTML = ` Humidity: ${humidityRound} %`;
+  humidity.innerHTML = `Humidity: ${humidityRound} %`;
 
   let wind = document.querySelector("#wind");
   let windRound = Math.round(response.data.wind.speed);
   wind.innerHTML = ` Wind: ${windRound} km/h`;
+
+  let weatherDescription= document.querySelector("#weather-description")
+  weatherDescription.innerHTML= response.data.weather[0].description;
+
 }
 
 function searchCity(event) {
@@ -109,6 +113,9 @@ function showCityName(response) {
   let wind = document.querySelector("#wind");
   let windRound = Math.round(response.data.wind.speed);
   wind.innerHTML = ` Wind: ${windRound} km/h`;
+
+  let weatherDescription= document.querySelector("#weather-description")
+  weatherDescription.innerHTML= response.data.weather[0].description;
 }
 
 function showCity(event) {
