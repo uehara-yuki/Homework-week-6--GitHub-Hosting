@@ -1,4 +1,4 @@
-//feature 1 homework week 4
+//feature 1 homework week 4- Display date and hour
 
 let date = document.querySelector("#date");
 
@@ -26,9 +26,9 @@ if (minutes < 10) {
 
 date.innerHTML = `${day} ${hours} : ${minutes}`;
 
-//feature 2- homework week 4
 
-//bonus feature- homework week 4
+
+//bonus feature- homework week 4- Convert Celsius to Fahrenheit
 
 function convertToCelsius(event) {
   event.preventDefault();
@@ -48,7 +48,7 @@ fahrenheit.addEventListener("click", convertToFahrenheit);
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", convertToCelsius);
 
-//homework week 5- Your task
+//homework week 5- Your task- Show the current temp/humidity/wind/description
 function showTemperature(response) {
   let temperature = document.querySelector("#temperature");
   let temperatureRound = Math.round(response.data.main.temp);
@@ -68,6 +68,7 @@ function showTemperature(response) {
 
 }
 
+// search for the city you typed 
 function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city");
@@ -85,7 +86,7 @@ searchForm.addEventListener("submit", searchCity);
 
 navigator.geolocation.getCurrentPosition(searchCity);
 
-//homework week 5- Bonus point
+//homework week 5- Bonus point- Show the data for your current location
 
 function clickCurrentButton(position) {
   let latitude = position.coords.latitude;
@@ -124,3 +125,32 @@ function showCity(event) {
 }
 let currentCity = document.querySelector("#current-button");
 currentCity.addEventListener("click", showCity);
+
+//change the weather icon
+
+function changeIcon(response) {
+  let weatherIcon = document.querySelector("#weather-icon");
+  let icon = response.data.weather[0].icon;
+  if (icon === "01d" || icon === "01n") {
+    weatherIcon.setAttribute("class", "fas fa-sun");
+  } else if (icon === "02d" || icon === "02n") {
+    weatherIcon.setAttribute("class", "fas fa-cloud-sun");
+  } else if (
+    icon === "03d" ||
+    icon === "03n" ||
+    icon === "04d" ||
+    icon === "04n"
+  ) {
+    weatherIcon.setAttribute("class", "fas fa-cloud");
+  } else if (icon === "09d" || icon === "09n") {
+    weatherIcon.setAttribute("class", "fas fa-cloud-rain");
+  } else if (icon === "10d" || icon === "10n") {
+    weatherIcon.setAttribute("class", "fas fa-cloud-showers-heavy");
+  } else if (icon === "11d" || icon === "11n") {
+    weatherIcon.setAttribute("class", "fas fa-bolt");
+  } else if (icon === "13d" || icon === "13n") {
+    weatherIcon.setAttribute("class", "far fa-snowflake");
+  } else if (icon === "50d" || icon === "50n") {
+    weatherIcon.setAttribute("class", "fas fa-smog");
+  }
+}
