@@ -16,6 +16,7 @@ h3 {
 .temperature {
   text-align: center;
   font-size: 30px;
+  color: black;
 }
 .date,
 .humidity,
@@ -48,4 +49,13 @@ line-height: 4;
 
 .searchButton {
   color: red;
+}
+
+.temperature .active{
+  color: back;
+  cursor: default;
+  text-decoration: none;
+}
+.temperature .active:hover{
+  text-decoration: none;
 }

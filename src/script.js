@@ -27,34 +27,6 @@ if (minutes < 10) {
 date.innerHTML = `${day} ${hours} : ${minutes}`;
 
 
-
-//bonus feature- homework week 4- Convert Celsius to Fahrenheit
-
-function convertToCelsius(event) {
-  event.preventDefault();
-let temperatureElement=document.querySelector("#temperature")
-
-  celsius.classList.add("active");
-  fahrenheit.classList.remove("active");
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  celsius.classList.add("active");
-  fahrenheit.classList.remove("active");
-  let fahrenheitTemperature= (celsiusTemperature * 9) / 5+ 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-let celsiusTemperature = null;
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", convertToFahrenheit);
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", convertToCelsius);
-
 //homework week 5- Your task- Show the current temp/humidity/wind/description
 function showTemperature(response) {
   let temperature = document.querySelector("#temperature");
@@ -72,6 +44,8 @@ function showTemperature(response) {
 
   let weatherDescription= document.querySelector("#weather-description")
   weatherDescription.innerHTML= response.data.weather[0].description;
+  
+  celsiusTemperature = response.data.main.temp; // used to convert C to F
 
 }
 
@@ -161,3 +135,32 @@ function changeIcon(response) {
     weatherIcon.setAttribute("class", "fas fa-smog");
   }
 }
+
+//bonus feature- homework week 4- Convert Celsius to Fahrenheit
+
+function convertToFahrenheit(event) {
+  event.preventDefault();
+
+  let temperatureElement = document.querySelector("#temperature");
+  
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
+  let fahrenheitTemperature= (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertToFahrenheit);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", convertToCelsius);
