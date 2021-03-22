@@ -32,15 +32,22 @@ date.innerHTML = `${day} ${hours} : ${minutes}`;
 
 function convertToCelsius(event) {
   event.preventDefault();
+let temperatureElement=document.querySelector("#temperature")
+
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 19;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
 function convertToFahrenheit(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 66;
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  let fahrenheitTemperature= (celsiusTemperature * 9) / 5+ 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
+let celsiusTemperature = null;
 
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", convertToFahrenheit);
