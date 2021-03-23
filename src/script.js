@@ -1,9 +1,7 @@
 //feature 1 homework week 4- Display date and hour
 
-let date = document.querySelector("#date");
-
-let now = new Date();
-now.getDay();
+function formatDate(timestamp){
+  let date = new Date(timestamp);
 
 let days = [
   "Sunday",
@@ -14,18 +12,23 @@ let days = [
   "Friday",
   "Saturday"
 ];
-let day = days[now.getDay()];
-let hours = now.getHours();
-if (hours < 10) {
-  hours = `0${hours}`;
-}
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
+let day = days[date.getDay()];
+return `${day} ${formatHours(timestamp)}`;
 }
 
-date.innerHTML = `${day} ${hours} : ${minutes}`;
+function formatHours(timestamp){
+   let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
+  return `${hours}:${minutes}`;
+}
 
 //homework week 5- Your task- Show the current temp/humidity/wind/description
 function showTemperature(response) {
@@ -45,7 +48,7 @@ function showTemperature(response) {
   let weatherDescription= document.querySelector("#weather-description")
   weatherDescription.innerHTML= response.data.weather[0].description;
   
-  celsiusTemperature = response.data.main.temp; // used to convert C to F
+   celsiusTemperature = response.data.main.temp; // used to convert C to F
 
 }
 
@@ -60,7 +63,33 @@ function searchCity(event) {
   let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${typeCity.value}&units=metric&appid=${apiKey}`;
 
   axios.get(apiurl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${typeCity.value}&appid=${apiKey}&units-metric`;
+  axios.get(apiurl).then(displayForecast);
+
 }
+
+
+//display forecast
+function displayForecast(response){
+
+let forecastElement = document.querySelector("#forecast");
+let forecast= response.data.main.list[0];
+forecastElement.innerHTML= 
+
+`    <div class="col-sm">
+        12:00
+       <br />
+       <strong> ${Math.round(forecast.main.temp_max)} °</strong>/ ${Math.round(forecast.main.temp_min)} °
+       <br />
+      <i class="fas fa-sun"></i> 
+    </div>
+`
+
+}
+
+
+
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", searchCity);
@@ -141,20 +170,20 @@ function changeIcon(response) {
 function convertToFahrenheit(event) {
   event.preventDefault();
 
-  let temperatureElement = document.querySelector("#temperature");
+  let temperature = document.querySelector("#temperature");
   
   celsius.classList.remove("active");
   fahrenheit.classList.add("active");
-  let fahrenheitTemperature= (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 function convertToCelsius(event) {
   event.preventDefault();
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  let temperature = document.querySelector("#temperature");
+  temperature.innerHTML = Math.round(celsiusTemperature);
 }
 
 let celsiusTemperature = null;
@@ -164,3 +193,4 @@ fahrenheit.addEventListener("click", convertToFahrenheit);
 
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", convertToCelsius);
+
